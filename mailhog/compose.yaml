@@ -6,6 +6,9 @@ services:
             - 8025:8025 # Mailhog's web UI listens on 8025
         container_name: mailhog
         image: docker.io/mailhog/mailhog
+        command: ["-storage=maildir", "-maildir-path=/maildir"] 
+        volumes:
+            - ./maildir:/maildir
         labels:
             - "traefik.enable=true"
             - "traefik.http.routers.mailhog.rule=Host(\"mailhog.localhost\")" # http://mailhog.localhost:8090
